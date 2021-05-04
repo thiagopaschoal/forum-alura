@@ -1,7 +1,7 @@
 package br.com.tspaschoal.forumalura.support;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface Converter<T, E> {
-    public List<T> converter(List<E> values);
+    public Page<T> converter(Page<E> values);
 }

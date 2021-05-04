@@ -1,10 +1,17 @@
 package br.com.tspaschoal.forumalura.models.entities;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "resposta")
+@Data
+@Getter
+@Setter
 public class Resposta {
 
 	@Id
@@ -43,54 +50,6 @@ public class Resposta {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getMensagem() {
-		return mensagem;
-	}
-
-	public void setMensagem(String mensagem) {
-		this.mensagem = mensagem;
-	}
-
-	public Topico getTopico() {
-		return topico;
-	}
-
-	public void setTopico(Topico topico) {
-		this.topico = topico;
-	}
-
-	public LocalDateTime getDataCriacao() {
-		return dataCriacao;
-	}
-
-	public void setDataCriacao(LocalDateTime dataCriacao) {
-		this.dataCriacao = dataCriacao;
-	}
-
-	public Usuario getAutor() {
-		return autor;
-	}
-
-	public void setAutor(Usuario autor) {
-		this.autor = autor;
-	}
-
-	public Boolean getSolucao() {
-		return solucao;
-	}
-
-	public void setSolucao(Boolean solucao) {
-		this.solucao = solucao;
 	}
 
 }

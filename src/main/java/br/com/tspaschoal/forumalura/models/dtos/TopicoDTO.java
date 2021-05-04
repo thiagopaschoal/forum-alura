@@ -2,18 +2,22 @@ package br.com.tspaschoal.forumalura.models.dtos;
 
 import br.com.tspaschoal.forumalura.models.entities.Topico;
 import br.com.tspaschoal.forumalura.support.Converter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Page;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
+@Data
+@Getter
+@NoArgsConstructor
 public class TopicoDTO implements Converter<TopicoDTO, Topico> {
 
     private String titulo;
     private String mensagem;
     private LocalDateTime dataCriacao;
-
-    public TopicoDTO() {}
 
     public TopicoDTO(Topico topico) {
         this.titulo = topico.getTitulo();
@@ -34,7 +38,7 @@ public class TopicoDTO implements Converter<TopicoDTO, Topico> {
     }
 
     @Override
-    public List<TopicoDTO> converter(List<Topico> values) {
-        return values.stream().map(TopicoDTO::new).collect(Collectors.toList());
+    public Page<TopicoDTO> converter(Page<Topico> values) {
+        return values.map(TopicoDTO::new);
     }
 }

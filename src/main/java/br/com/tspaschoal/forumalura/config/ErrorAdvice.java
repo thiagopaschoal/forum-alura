@@ -1,4 +1,4 @@
-package br.com.tspaschoal.forumalura.support;
+package br.com.tspaschoal.forumalura.config;
 
 import br.com.tspaschoal.forumalura.models.dtos.ErrorDTO;
 import org.springframework.beans.factory.annotation.Autowired;

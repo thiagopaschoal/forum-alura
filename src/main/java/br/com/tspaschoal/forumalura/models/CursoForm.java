@@ -11,15 +11,12 @@ import javax.validation.constraints.NotNull;
 @Data
 @Getter
 @AllArgsConstructor
-public class TopicoForm {
+public class CursoForm {
 
-    @NotNull @NotEmpty @Length(max = 50)
-    private String titulo;
+    @NotEmpty @NotNull @Length(max = 50)
+    private String nome;
 
-    @NotNull @NotEmpty
-    private String mensagem;
-
-    @NotNull @NotEmpty
-    private String curso;
+    @NotEmpty @NotNull @Length(max = 20)
+    private String categoria;
 
 }

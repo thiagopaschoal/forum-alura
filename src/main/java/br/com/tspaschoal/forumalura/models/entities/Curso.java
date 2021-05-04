@@ -1,9 +1,16 @@
 package br.com.tspaschoal.forumalura.models.entities;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "curso")
+@Data
+@Getter
+@Setter
 public class Curso {
 
 	@Id
@@ -42,30 +49,6 @@ public class Curso {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
 	}
 
 }

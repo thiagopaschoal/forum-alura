@@ -9,6 +9,9 @@ import br.com.tspaschoal.forumalura.repositories.CursoRepository;
 import br.com.tspaschoal.forumalura.repositories.TopicoRepository;
 import br.com.tspaschoal.forumalura.services.TopicoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -25,11 +28,11 @@ public class TopicoServiceImp implements TopicoService  {
     private CursoRepository cursoRepository;
 
     @Override
-    public ResponseEntity<List<TopicoDTO>> findAll() {
+    public ResponseEntity<Page<TopicoDTO>> findAll(Pageable pageable) {
 
-        final var topicos = this.repository.findAll();
+        final var topicos = this.repository.findAll(pageable);
 
-        if (topicos == null || topicos.size() == 0) {
+        if (topicos == null || topicos.getSize() == 0) {
             return ResponseEntity.notFound().build();
         }
 

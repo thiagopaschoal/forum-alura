@@ -1,9 +1,16 @@
 package br.com.tspaschoal.forumalura.models.dtos;
 
 import br.com.tspaschoal.forumalura.models.entities.Topico;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@Data
+@Getter
+@NoArgsConstructor
 public class DetalheTopicoDTO {
 
     private String titulo;
@@ -20,23 +27,4 @@ public class DetalheTopicoDTO {
         this.curso = topico.getCurso().getNome();
     }
 
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public String getMensagem() {
-        return mensagem;
-    }
-
-    public LocalDateTime getDataCriacao() {
-        return dataCriacao;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public String getCurso() {
-        return curso;
-    }
 }

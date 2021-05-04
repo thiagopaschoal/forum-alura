@@ -5,11 +5,12 @@ import br.com.tspaschoal.forumalura.models.dtos.DetalheTopicoDTO;
 import br.com.tspaschoal.forumalura.models.dtos.TopicoDTO;
 import br.com.tspaschoal.forumalura.services.TopicoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/topicos")
@@ -19,8 +20,8 @@ public class TopicoController {
     private TopicoService topicoService;
 
     @GetMapping
-    public ResponseEntity<List<TopicoDTO>> findAll() {
-        return topicoService.findAll();
+    public ResponseEntity<Page<TopicoDTO>> findAll(Pageable page) {
+        return topicoService.findAll(page);
     }
 
     @GetMapping("/{id}")

@@ -4,6 +4,7 @@ import br.com.tspaschoal.forumalura.config.filters.AuthenticationFilter;
 import br.com.tspaschoal.forumalura.repositories.UserRepository;
 import br.com.tspaschoal.forumalura.services.AuthenticationService;
 import br.com.tspaschoal.forumalura.services.TokenService;
+import br.com.tspaschoal.forumalura.support.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,6 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/auth").permitAll()
                 .antMatchers(HttpMethod.GET, "/actuator/*").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/topicos/*").hasRole(Role.MODERADOR.name())
                 .anyRequest().authenticated()
                 .and().csrf().disable()
                 .sessionManagement()

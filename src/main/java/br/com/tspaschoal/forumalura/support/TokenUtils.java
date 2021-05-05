@@ -10,4 +10,5 @@ public class TokenUtils {
         var usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(form.getEmail(), form.getSenha());
         return usernamePasswordAuthenticationToken;
     }
+
 }

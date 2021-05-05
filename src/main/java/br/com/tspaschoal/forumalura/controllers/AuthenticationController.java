@@ -1,15 +1,13 @@
 package br.com.tspaschoal.forumalura.controllers;
 
-import antlr.Token;
 import br.com.tspaschoal.forumalura.models.LoginForm;
 import br.com.tspaschoal.forumalura.models.dtos.TokenDTO;
 import br.com.tspaschoal.forumalura.services.TokenService;
 import br.com.tspaschoal.forumalura.support.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +18,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/auth")
+@Profile("prod")
 public class AuthenticationController {
 
     @Autowired

@@ -22,9 +22,4 @@ public class LoginForm {
     @NotNull @NotEmpty
     private String senha;
 
-    public UsernamePasswordAuthenticationToken getUsernamePasswordAuthenticationToken() {
-        var usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(this.email, this.senha);
-        return usernamePasswordAuthenticationToken;
-    }
-
 }

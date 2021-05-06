@@ -1,8 +1,6 @@
 package br.com.tspaschoal.forumalura.models.entities;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -11,6 +9,8 @@ import javax.persistence.*;
 @Data
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 public class Curso {
 
 	@Id

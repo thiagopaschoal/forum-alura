@@ -9,13 +9,13 @@ import org.springframework.http.ResponseEntity;
 
 public interface TopicoService {
 
-    public ResponseEntity<Page<TopicoDTO>> findAll(Pageable pageable);
+    public Page<TopicoDTO> findAll(Pageable pageable);
 
-    public ResponseEntity<DetalheTopicoDTO> findById(Long id);
+    public DetalheTopicoDTO findById(Long id);
 
-    public ResponseEntity<TopicoDTO> save(TopicoForm form);
+    public TopicoDTO save(TopicoForm form);
 
-    public ResponseEntity<TopicoDTO> update(Long id, TopicoForm form);
+    public TopicoDTO update(Long id, TopicoForm form);
 
     public ResponseEntity remove(Long id);
 

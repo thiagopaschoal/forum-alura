@@ -1,24 +1,24 @@
 package br.com.tspaschoal.forumalura.services.imp;
 
+import br.com.tspaschoal.forumalura.models.TopicoForm;
 import br.com.tspaschoal.forumalura.models.dtos.DetalheTopicoDTO;
+import br.com.tspaschoal.forumalura.models.dtos.TopicoDTO;
 import br.com.tspaschoal.forumalura.models.entities.Curso;
 import br.com.tspaschoal.forumalura.models.entities.Topico;
-import br.com.tspaschoal.forumalura.models.TopicoForm;
-import br.com.tspaschoal.forumalura.models.dtos.TopicoDTO;
 import br.com.tspaschoal.forumalura.repositories.CursoRepository;
 import br.com.tspaschoal.forumalura.repositories.TopicoRepository;
 import br.com.tspaschoal.forumalura.services.TopicoService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class TopicoServiceImp implements TopicoService  {
 
     @Autowired
@@ -28,52 +28,53 @@ public class TopicoServiceImp implements TopicoService  {
     private CursoRepository cursoRepository;
 
     @Override
-    public ResponseEntity<Page<TopicoDTO>> findAll(Pageable pageable) {
+    public Page<TopicoDTO> findAll(Pageable pageable) {
 
         final var topicos = this.repository.findAll(pageable);
 
         if (topicos == null || topicos.getSize() == 0) {
-            return ResponseEntity.notFound().build();
+            return null;
         }
 
-        return ResponseEntity.ok(new TopicoDTO().converter(topicos));
+        return new TopicoDTO().converter(topicos);
     }
 
     @Override
-    public ResponseEntity<DetalheTopicoDTO> findById(Long id) {
-        final var topico = this.repository.findById(id);
+    public DetalheTopicoDTO findById(Long id) {
+        final var topico = this.repository.getOne(id);
 
-        if (!topico.isPresent()) {
-            return ResponseEntity.notFound().build();
+        if (topico == null) {
+            return null;
         }
 
-        return ResponseEntity.ok(new DetalheTopicoDTO(topico.get()));
+        return new DetalheTopicoDTO(topico);
     }
 
     @Override
-    public ResponseEntity<TopicoDTO> save(TopicoForm form) {
+    public TopicoDTO save(TopicoForm form) {
 
         Optional<Curso> curso = cursoRepository.findByNome(form.getCurso());
 
         if (!curso.isPresent()) {
-            return ResponseEntity.notFound().build();
+            return null;
         }
 
-        final Topico topico = new Topico();
-        topico.setMensagem(form.getMensagem());
-        topico.setTitulo(form.getTitulo());
-        topico.setCurso(curso.get());
+        final Topico topico = Topico.builder()
+                .titulo(form.getTitulo())
+                .curso(curso.get())
+                .mensagem(form.getMensagem())
+                .build();
 
         var topicoSaved = repository.save(topico);
 
-        return ResponseEntity.ok(new TopicoDTO(topicoSaved));
+        return new TopicoDTO(topicoSaved);
     }
 
     @Override
-    public ResponseEntity<TopicoDTO> update(Long id, TopicoForm form) {
+    public TopicoDTO update(Long id, TopicoForm form) {
         final Topico topico = this.repository.getOne(id);
         if (topico == null) {
-            return ResponseEntity.notFound().build();
+            return null;
         }
 
         topico.setTitulo(form.getTitulo());
@@ -81,7 +82,7 @@ public class TopicoServiceImp implements TopicoService  {
 
         Topico topicoAlterado = this.repository.saveAndFlush(topico);
 
-        return ResponseEntity.ok(new TopicoDTO(topicoAlterado));
+        return new TopicoDTO(topicoAlterado);
     }
 
     @Override

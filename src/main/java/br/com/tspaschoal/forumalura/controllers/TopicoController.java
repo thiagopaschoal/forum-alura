@@ -21,23 +21,24 @@ public class TopicoController {
 
     @GetMapping
     public ResponseEntity<Page<TopicoDTO>> findAll(Pageable page) {
-        return topicoService.findAll(page);
+        Page<TopicoDTO> topicoDTOS = topicoService.findAll(page);
+        return topicoDTOS == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(topicoDTOS);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<DetalheTopicoDTO> findById(@PathVariable Long id) {
-        return topicoService.findById(id);
+        DetalheTopicoDTO detalheTopicoDTO = topicoService.findById(id);
+        return detalheTopicoDTO == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(detalheTopicoDTO);
     }
 
     @PostMapping
     public ResponseEntity save(@RequestBody @Valid TopicoForm form) {
-        return topicoService.save(form);
+        return ResponseEntity.ok(topicoService.save(form));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable Long id,
-                                 @RequestBody @Valid TopicoForm form) {
-        return this.topicoService.update(id, form);
+    public ResponseEntity update(@PathVariable Long id, @RequestBody @Valid TopicoForm form) {
+        return ResponseEntity.ok(this.topicoService.update(id, form));
     }
 
     @DeleteMapping("/{id}")

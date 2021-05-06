@@ -1,16 +1,16 @@
 package br.com.tspaschoal.forumalura.models.dtos;
 
 import br.com.tspaschoal.forumalura.models.entities.Topico;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Data
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString
 public class DetalheTopicoDTO {
 
     private String titulo;

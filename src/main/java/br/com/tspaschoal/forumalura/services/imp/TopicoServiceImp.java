@@ -56,7 +56,7 @@ public class TopicoServiceImp implements TopicoService  {
         Optional<Curso> curso = cursoRepository.findByNome(form.getCurso());
 
         if (!curso.isPresent()) {
-            return null;
+            throw new RuntimeException("topic not found");
         }
 
         final Topico topico = Topico.builder()

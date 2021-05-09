@@ -1,9 +1,6 @@
 package br.com.tspaschoal.forumalura.models.entities;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -17,6 +14,7 @@ import java.util.List;
 @Data
 @Getter
 @Setter
+@Builder
 @EqualsAndHashCode(exclude = { "nome", "email", "senha" })
 public class Usuario implements UserDetails {
 
